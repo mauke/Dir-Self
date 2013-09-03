@@ -1,18 +1,12 @@
 package Dir::Self;
 
+$VERSION = '0.10';
+
 use 5.005;
 use strict;
 
 use File::Spec ();
 
-*VERSION = \'0.10';
-
-sub _croak {
-	require Carp;
-	local $^W = 0;
-	*_croak = \&Carp::croak;
-	goto &Carp::croak;
-}
 
 sub __DIR__ () {
 	my $level = shift || 0;
@@ -39,7 +33,8 @@ sub import {
 			no strict 'refs';
 			*{$caller . '::__DIR__'} = _const &__DIR__(1);
 		} else {
-			_croak qq{"$item" is not exported by the $class module};
+			require Carp;
+			Carp::croak(qq{"$item" is not exported by the $class module});
 		}
 	}
 }
@@ -82,7 +77,7 @@ Lukas Mai E<lt>l.mai @web.deE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2007, 2008 by Lukas Mai
+Copyright (C) 2007, 2008, 2013 by Lukas Mai
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.8 or,
