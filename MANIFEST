@@ -1,0 +1,7 @@
+Makefile.PL
+MANIFEST
+README
+t/Dir-Self.t
+t/zerlegungsgleichheit/d.t
+lib/Dir/Self.pm
+META.yml                                 Module meta-data (added by MakeMaker)
